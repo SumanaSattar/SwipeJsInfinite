@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: rgb(250, 249, 249);
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+    img {
+        width:20vw;
+    }
+
+    .swiper-container {
+    display:grid;
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .container {
+        display:flex;
+    }
+    h1 {
+        writing-mode:vertical-rl;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Swiper -->
+
+  <div class="container">
+           <div><h1>hello</h1></div>
+            <div class="swiper-container">
+            
+                <div class="swiper-wrapper">
+                
+                    <div class="swiper-slide"><h1>Brands</h1><img src="img/1.png" alt="video"></div>
+                    <div class="swiper-slide"><h1>Shops</h1><img src="img/2.png" alt="video"></div>
+                    <div class="swiper-slide"><h1>Creaters</h1><img src="img/3.png" alt="v2"></div>
+                    <div class="swiper-slide"><h1>Community</h1><img src="img/4.png" alt="video"></div>
+                    <div class="swiper-slide"><h1>Videos</h1><img src="img/5.png" alt="video"></div>
+                </div>
+            </div>
+            <div><h1>hello</h1></div>
+  </div>
+ 
+
+  <!-- Swiper JS -->
+ 
+
+  <!-- Initialize Swiper -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+        on: {
+            slideChange: function(e) {
+                
+    var realIndex = e.slides.eq(e.activeIndex).attr('data-swiper-slide-index');
+    var currentSlide = e.slides[realIndex];
+    
+    console.log(currentSlide);
+    // do whatever
+        
+        /*on: {
+       slideChange: function () {
+      let index_currentSlide = swiper.realIndex,
+      currentSlide = swiper.slides[index_currentSlide]
+      //https://stackoverflow.com/questions/32945099/how-to-detect-current-slide-in-swiper-js
+      currentSlide.style.background = "red";
+      console.log(currentSlide);*/
+      
+    },
+},    
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    
+    });
+  </script>
+  
+</body>
+
+</html>
