@@ -46,6 +46,7 @@
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
+      flex-direction: column;
       -webkit-box-pack: center;
       -ms-flex-pack: center;
       -webkit-justify-content: center;
@@ -57,9 +58,13 @@
     }
     .container {
         display:flex;
+        
     }
     h1 {
         writing-mode:vertical-rl;
+    }
+    .left,.right{
+        align-self: center;
     }
   </style>
 </head>
@@ -68,19 +73,26 @@
   <!-- Swiper -->
 
   <div class="container">
-           <div><h1>hello</h1></div>
+           <div class="left"><h1 class="leftContent">hello</h1></div>
             <div class="swiper-container">
             
                 <div class="swiper-wrapper">
                 
-                    <div class="swiper-slide"><h1>Brands</h1><img src="img/1.png" alt="video"></div>
-                    <div class="swiper-slide"><h1>Shops</h1><img src="img/2.png" alt="video"></div>
-                    <div class="swiper-slide"><h1>Creaters</h1><img src="img/3.png" alt="v2"></div>
-                    <div class="swiper-slide"><h1>Community</h1><img src="img/4.png" alt="video"></div>
-                    <div class="swiper-slide"><h1>Videos</h1><img src="img/5.png" alt="video"></div>
+                    <div class="swiper-slide"><h3>Brands</h3><img src="img/1.png" alt="video"></div>
+                    <div class="swiper-slide"><h3>Shops</h3><img src="img/2.png" alt="video"></div>
+                    <div class="swiper-slide"><h3>Creaters</h3><img src="img/3.png" alt="v2"></div>
+                    <div class="swiper-slide"><h3>Community</h3><img src="img/4.png" alt="video"></div>
+                    <div class="swiper-slide"><h3>Videos</h3><img src="img/5.png" alt="video"></div>
+                    
                 </div>
+                 
+             
             </div>
-            <div><h1>hello</h1></div>
+            <div class="right"><h1 class="rightContent">hello</h1></div>
+            
+            <!--<div class="swiper-pagination"></div>-->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
   </div>
  
 
@@ -91,14 +103,34 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
+    let rightContent = document.querySelector(".rightContent");
+    let leftContent = document.querySelector(".leftContent");
+    let sliderContent= ["Creaters","Community","Videos","Brands","Shops"];
     var swiper = new Swiper('.swiper-container', {
         on: {
             slideChange: function(e) {
-                
+             //https://github.com/nolimits4web/Swiper/pull/1697   
     var realIndex = e.slides.eq(e.activeIndex).attr('data-swiper-slide-index');
-    var currentSlide = e.slides[realIndex];
+   
+    //var currentSlide = e.slides[realIndex];
+    var rightIndex = Number(realIndex)+1;
+    //var currentRight= e.slides[rightIndex];
+    var leftIndex = Number(realIndex)+2;
+    console.log(leftIndex)
+    if (leftIndex===5){
+        leftIndex=0;
+    }
+    if (leftIndex===6){
+        leftIndex=1;
+        rightIndex=0;
+    }
+   // var currentLeft= e.slides[leftIndex];
+    rightContent.innerHTML=sliderContent[rightIndex];
+    leftContent.innerHTML=sliderContent[leftIndex];
+    console.log(sliderContent[rightIndex]);
+    console.log(sliderContent[leftIndex]);
+     console.log(realIndex);
     
-    console.log(currentSlide);
     // do whatever
         
         /*on: {
