@@ -70,8 +70,8 @@
           
 }
 .bottomImg {
-  position: absolute;
   top: 15%;
+
 }
 
 /* ----------------------------------------------
@@ -259,25 +259,7 @@
     
       z-index:3;
     }
-    
-  .floatimg {
-    transform: translatey(0px);
-	animation: float 6s ease-in-out infinite;
-  }
-@keyframes float {
-	0% {
-		box-shadow: 0 5px 15px 0px rgba(53, 52, 52, 0.6);
-		transform: translatey(0px);
-	}
-	50% {
-		box-shadow: 0 25px 15px 0px rgba(53, 51, 51, 0.2);
-		transform: translatey(-20px);
-	}
-	100% {
-		box-shadow: 0 5px 15px 0px rgba(65, 63, 63, 0.6);
-		transform: translatey(0px);
-	}
-}
+   
 
 
   </style>
@@ -295,7 +277,7 @@
                     <div class="swiper-slide"><p> OPEN SHOP</p><h3>CONTENT CREATOR</h3><div>&#10132</div><img src="img/1.png" alt="video" class="vibrate-1"></div>
                     <div class="swiper-slide bottomImg"><p>  BECOME A</p><h3>BRAND PARTNER</h3><div>&#10132</div><img src="img/2.png" alt="video" class="slide-bottom "></div>
                     <div class="swiper-slide"><p> PR</p><h3>LEARN MORE</h3><div>&#10132</div><img src="img/3.png" alt="v2" class="vibrate-1"></div>
-                    <div class="swiper-slide"><p>I HAVE A QUESTION</p><h3>CUSTOMERS</h3><div>&#10132</div><img src="img/4.png" alt="video" class="vibrate-1"></div>
+                    <div class="swiper-slide bottomImg"><p>I HAVE A QUESTION</p><h3>CUSTOMERS</h3><div>&#10132</div><img src="img/4.png" alt="video" class="slide-bottom "></div>
                     <div class="swiper-slide"><p> JOIN OUR</p><h3>ECOSYSTEM</h3><div>&#10132</div><img src="img/5.png" alt="video" class="vibrate-1"></div>
                     
                 </div>
@@ -318,16 +300,27 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
+    let bottomImg = document.querySelector(".bottomImg");
+    console.log(bottomImg);
     let rightContent = document.querySelector(".rightContent");
     let leftContent = document.querySelector(".leftContent");
     let sliderContent= ["LEARN MORE","CUSTOMERS","ECOSYSTEM","CREATORS","BRANDS"];
+    let bottomSlide;
     var swiper = new Swiper('.swiper-container', {
         on: {
             slideChange: function(e) {
              //https://github.com/nolimits4web/Swiper/pull/1697   
     var realIndex = e.slides.eq(e.activeIndex).attr('data-swiper-slide-index');
     console.log(realIndex);
-    //var currentSlide = e.slides[realIndex];
+    var currentSlide = e.slides[realIndex];
+    if (realIndex!=0){
+      bottomSlide=e.slides[realIndex-1];
+    }else {
+      bottomSlide=bottomImg;
+    }
+    
+    console.log(bottomSlide);
+    
     var rightIndex = Number(realIndex)+1;
     //var currentRight= e.slides[rightIndex];
     var leftIndex = Number(realIndex)+2;
@@ -340,8 +333,13 @@
         rightIndex=0;
     }
    // var currentLeft= e.slides[leftIndex];
+    //bottomSlide.className += " slide-bottom ";
+  
+   // bottomSlide.classList.add("bottomImg");
+   
     rightContent.innerHTML=sliderContent[rightIndex];
     leftContent.innerHTML=sliderContent[leftIndex];
+    console.log(currentSlide);
     console.log(sliderContent[rightIndex]);
     console.log(sliderContent[leftIndex]);
      console.log(realIndex);
@@ -358,7 +356,7 @@
       
     },
 },    
-      slidesPerView: 3,
+    
       spaceBetween: 30,
       loop: true,
       loopFillGroupWithBlank: true,
@@ -370,6 +368,20 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      breakpoints: {
+      0: { /* when window >=0px - webflow mobile landscape/portriat */
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+      767: { /* when window >= 767px - webflow tablet */
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
+      988: { /* when window >= 988px - webflow desktop */
+        slidesPerView: 3,
+        spaceBetween: 30,
+      }
+    }
     
     });
   </script>
